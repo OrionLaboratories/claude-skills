@@ -102,7 +102,7 @@ Read the full content of each email. Load `references/priority-framework.md`
 and classify every email into exactly one tier:
 
 | Tier | Label | Meaning |
-|------|-------|---------|
+|------|-------|--------|
 | 1 | URGENT | Respond today -- time pressure or organizational risk |
 | 2 | IMPORTANT | Respond this week -- strategic but not time-critical |
 | 3 | DELEGATE | Route to someone else -- action needed, but not from you |
@@ -250,6 +250,38 @@ Focused on drafting a single reply (or a small batch).
 5. **Iterate if needed**: Apply the executive's feedback and revise.
 6. **Create/send**: In Full Mode, create the draft in Outlook. Only send upon
    explicit confirmation ("send it", "go ahead", "yes, send").
+
+---
+
+## Dashboard Output
+
+**Every triage and briefing result MUST be presented as an interactive HTML
+dashboard** saved to a file the executive can open in their browser. This is
+the primary output format -- not markdown tables.
+
+When you complete Step 2 (classify emails) in any workflow mode, read
+`references/orion-dashboard-theme.md` and generate a self-contained HTML file
+using the Orion brand theme. Save it to a local path (e.g., `/tmp/inbox-triage-[date].html`)
+and tell the executive where to find it.
+
+### What the dashboard includes
+
+1. **Header bar** with "Orion Inbox" branding, date, and email count
+2. **Filter bar** with clickable chips to show/hide tiers (All, Urgent, Important, Delegate, Defer, FYI)
+3. **Stats row** with one card per tier showing count and the tier's accent color
+4. **Action items section** with checkboxes for every action item extracted from emails
+5. **Tier sections** with email cards showing: number badge, sender, subject, preview snippet, time received, and a color-coded action pill (Reply, Forward, Flag, Archive)
+6. **Interactivity**: filter chips toggle tier visibility, clicking a card toggles selection (for batch commands), staggered fade-in animations
+
+### Dashboard generation rules
+
+- The HTML file must be **fully self-contained** -- all CSS and JS inline, no external dependencies
+- Use the **exact CSS variables and component classes** from `references/orion-dashboard-theme.md`
+- Use the **Orion primary color** `#D50032` for branding, buttons, and selected states
+- Map each email tier to its corresponding color set (Urgent=red, Important=amber, Delegate=purple, Defer=blue, FYI=gray)
+- Include `<meta name="viewport">` for mobile responsiveness
+- Use staggered `animation-delay` on email cards for a polished load feel
+- After generating the dashboard, also present a brief text summary in the conversation (3-4 lines max) so the executive has immediate context without opening the file
 
 ---
 
